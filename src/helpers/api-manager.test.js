@@ -15,7 +15,6 @@ global.fetch = jest.fn(() =>
 	})
 );
 
-
 it('getSearch - Call the API with the query as a query parameter and return the array of suggestions', async () => {
 	expect.hasAssertions();
 

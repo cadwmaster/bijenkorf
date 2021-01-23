@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Search from './components/search';
+import Search from './components/Search';
 import { getSearch } from './helpers/api-manager';
 
 class App extends Component {
