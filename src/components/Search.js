@@ -10,7 +10,6 @@ class Search extends Component {
 		debounceTime: 500,
 		placeholder: 'Zoeken',
 		minLength: 3,
-		onChange: () => { },
 		suggestions: [],
 		initialValue: ''
 	};
@@ -60,7 +59,7 @@ class Search extends Component {
 						<BiSearch className="react-icons" />
 					</div>
 				</div>
-				<div className={`suggestions-container ${this.state.parsedSuggestions.length === 0 ? 'empty': '' }`}>
+				<div className={`suggestions-container ${this.state.parsedSuggestions.length === 0 ? 'empty' : ''}`}>
 					<ul>
 						{this.state.parsedSuggestions.map(
 							(item, index) => (
@@ -121,7 +120,10 @@ Search.propTypes = {
 	placeholder: PropTypes.string,
 	minLength: PropTypes.number,
 	onChange: PropTypes.func,
-	suggestions: PropTypes.array,
+	suggestions: PropTypes.arrayOf(PropTypes.shape({
+		searchterm: PropTypes.string,
+		nrResults: PropTypes.number
+	})),
 	initialValue: PropTypes.string
 };
 

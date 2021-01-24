@@ -6,6 +6,8 @@ export default {
 	title: 'Search',
 };
 
+const Template = (args) => <Search {...args} />;
+
 const suggestions = [{
 	searchterm: 'suggestion number 1',
 	nrResults: 100
@@ -17,10 +19,13 @@ const suggestions = [{
 	nrResults: 10000
 }];
 
-export const Empty = () => (
-	<Search placeholder="Search here" />
-);
+export const Empty = Template.bind({});
+Empty.args = {
+	placeholder: "Search here"
+};
 
-export const WithSuggestions = () => (
-	<Search suggestions={suggestions} initialValue='suggestion' />
-);
+export const WithSuggestions = Template.bind({});
+WithSuggestions.args = {
+	initialValue: 'suggestion',
+	suggestions
+};

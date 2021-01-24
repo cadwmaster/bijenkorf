@@ -14,7 +14,12 @@
   },
   "devDependencies": {
     "@babel/core": "7.7.4",
-    "@storybook/react": "5.2.6",
+    "@storybook/addon-actions": "^6.1.15",
+    "@storybook/addon-essentials": "^6.1.15",
+    "@storybook/addon-links": "^6.1.15",
+    "@storybook/node-logger": "^6.1.15",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.15",
     "babel-loader": "8.0.6",
     "concurrently": "3.5.1",
     "jest-environment-jsdom-sixteen": "^1.0.3",
@@ -24,9 +29,10 @@
     "start": "concurrently \"react-scripts start\" \"canned -p 5000 ./api/\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
-    "coverage": "react-scripts test --env=jest-environment-jsdom-sixteen --coverage",
+    "coverage": "react-scripts test --env=jest-environment-jsdom-sixteen --coverage --watchAll=false",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
@@ -42,6 +48,17 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/src/index.js",
+      "/src/serviceWorker.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.stories.js"
     ]
   }
 }
