@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Search onChange={this.handleSeachText} minLength="3" suggestions={this.state.suggestions} />
+        <Search onChange={this.handleSeachText} minLength={3} suggestions={this.state.suggestions} />
       </div>
     );
   }

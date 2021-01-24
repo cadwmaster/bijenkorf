@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, waitFor } from '@testing-library/react';
 import Search from './Search';
 
 afterEach(() => {
@@ -17,7 +17,7 @@ it('render the component without attributes', () => {
 it('render the component with attributes', () => {
 	expect.hasAssertions();
 
-	const { container } = render(<Search placeholder="Search" minLength="5" debounceTime="100" />);
+	const { container } = render(<Search placeholder="Search" minLength={5} debounceTime={100} />);
 
 	expect(container.querySelector('.search-container')).toBeVisible();
 });
@@ -44,7 +44,7 @@ it('handleChange is trigger after input change', async () => {
 
 	const spy = jest.fn();
 
-	const { container } = render(<Search debounceTime="1" onChange={spy} />);
+	const { container } = render(<Search debounceTime={1} onChange={spy} />);
 	const input = container.querySelector('input');
 	const textValue = 'test';
 
@@ -60,7 +60,7 @@ it('handleChange is trigger after input change', () => {
 
 	const spy = jest.fn();
 
-	const { container } = render(<Search debounceTime="1" minLength="5" onChange={spy} />);
+	const { container } = render(<Search debounceTime={1} minLength={5} onChange={spy} />);
 	const input = container.querySelector('input');
 
 	fireEvent.change(input, {target: {value: 'test'}});
@@ -70,7 +70,6 @@ it('handleChange is trigger after input change', () => {
 
 it('handleClear when icon is clicked', () => {
 	expect.hasAssertions();
-
 
 	const suggestions = [
 		{
@@ -91,4 +90,25 @@ it('handleClear when icon is clicked', () => {
 	fireEvent.click(clearButton);
 	expect(input.value).toBe('');
 	expect(container.querySelectorAll('.suggestion-container')).toHaveLength(0);
+});
+
+it('handleClick when suggestion is clicked', () => {
+	expect.hasAssertions();
+
+	const suggestions = [
+		{
+			searchterm: 'something'
+		},
+		{
+			searchterm: 'something else'
+		}
+	];
+
+	const { container } = render(<Search suggestions={suggestions} />);
+	const input = container.querySelector('input');
+	const items = container.querySelectorAll('.suggestion-container')
+
+	fireEvent.click(items[0]);
+
+	expect(input.value).toBe('something');
 });
